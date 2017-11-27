@@ -31,11 +31,12 @@ public class Direction extends Geometry {
 		this.setZ(this.getZ() /Math.sqrt(Math.pow(this.getX(), 2)+Math.pow(this.getY(), 2)+Math.pow(this.getZ(), 2)));
 	    return this;
 	}
+	
 	public Direction scale(double t) {
 		Direction r = new Direction(0, 0, 0);
-		r.setX(t*getX());
-		r.setY(t*getY());
-		r.setZ(t*getZ());
+		r.setX(t*this.getX());
+		r.setY(t*this.getY());
+		r.setZ(t*this.getZ());
 		return r;
 	}
 

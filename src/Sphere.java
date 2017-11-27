@@ -9,6 +9,12 @@ public class Sphere extends Figure {
 		this.radio = radio;
 	}
 
+
+	public Direction getNormal(Point p) {
+		Direction d= Geometry.subD(p,super.getCenter()).doModule();
+		return d; 
+	}
+	
 	public double intersect(Point O, Direction d) {
 		// Implementar interseccion esfera
 		/*
@@ -44,7 +50,4 @@ public class Sphere extends Figure {
 		return -1;
 	}
 	
-	public Direction getNormal(Point p) {
-		return Geometry.subD(p,super.getCenter());
-	}
 }

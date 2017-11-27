@@ -28,7 +28,7 @@ public class PathTracer {
 		// Variables Path
 		BufferedImage bI = new BufferedImage(x, y, BufferedImage.TYPE_INT_RGB);
 		Geometry geo = new Direction(0, 0, 1);
-		File h = new File("triangle2.bmp");
+		File h = new File("triangle3.bmp");
 
 		// Camera
 		Point center = new Point(0, 0, 0);
@@ -72,19 +72,19 @@ public class PathTracer {
 		List<Figure> figures = new ArrayList<Figure>();
 		Figure defaultF = new Figure(new Point(0, 0, 0), Color.BLACK, m, new Direction(0, 0, 0));
 		Color finalColor;
-		figures.add(new Plane(new Point(0, 500, 500), new Direction(0, -1, 0), Color.BLUE, 200, l)); // arriba
-		figures.add(new Plane(new Point(-100, 0, 0), new Direction(0, 1, 0), Color.GREEN, 200, m));
-		figures.add(new Plane(new Point(-100, 0, 0), new Direction(0, 0, -1), Color.DARK_GRAY, 500, m)); // fondo
+		figures.add(new Plane(new Point(0, 500, 500), new Direction(0, -1, 0), Color.BLUE, 400, l)); // arriba
+		figures.add(new Plane(new Point(-100, 0, 0), new Direction(0, 1, 0), Color.GREEN, 400, m));
+		figures.add(new Plane(new Point(-100, 0, 0), new Direction(0, 0, -1), Color.DARK_GRAY, 700, m)); // fondo
 		// figures.add(new Plane(new Point(-100, 0, 0), new Direction(0, 0, 1),
 		// Color.RED, 94, m));
-		figures.add(new Plane(new Point(-100, 0, 0), new Direction(-1, 0, 0), Color.MAGENTA, 200, m)); // izq
-		figures.add(new Plane(new Point(-100, 0, 0), new Direction(1, 0, 0), Color.ORANGE, 200, m));
+		figures.add(new Plane(new Point(-100, 0, 0), new Direction(-1, 0, 0), Color.MAGENTA, 400, m)); // izq
+		figures.add(new Plane(new Point(-100, 0, 0), new Direction(1, 0, 0), Color.ORANGE, 400, m));
 		// figures.add(new Triangle(new Point(-0.2, 1, 14),new Point(1, 0.2, 10),new
 		// Point(0, 0, 4), new Direction(1, 0, 4), Color.GREEN, 10, m));
 		// figures.add(new Triangle(new Point(0, 0, 20), new Point(0, 1, 20), new
 		// Point(1, 1, 20), new Direction(0, 0, 1),
 		// Color.RED, 10, m));
-		//figures.add(new Sphere(new Point(5, 5, -15), 1, Color.WHITE, m, new Direction(0, 0, 0)));
+		figures.add(new Sphere(new Point(5, 5, -15), 1, Color.RED, m, new Direction(0, 0, 0)));
 		// figures.add(new Triangle(new Point(0, 2, 20), new Point(-2, 9, 20), new
 		// Point(0, 9, -10), d, Color.WHITE, 90, l));
 		// figures.add(new Triangle(new Point(0, 2, 20), new Point(2, 9, 20), new
@@ -162,7 +162,7 @@ public class PathTracer {
 					// Light of direct Light
 				}
 			}
-			Color lD = luzDirecta(rayPath.pIntersect, new Point(0, 0, -300), figures, f);
+			Color lD = luzDirecta(rayPath.pIntersect, new Point(0, 500, -500), figures, f);
 			// Recursivity ray
 /*
 			double rrr = rr.calculateRussian(f.getKD(), f.getKS());
@@ -209,10 +209,8 @@ public class PathTracer {
 	}
 	public static Color luzDirecta(Point intersect, Point light, List<Figure> f, Figure fi) {
 		Direction cx = new Direction(0, 0, 0);
-		Direction p = new Direction(0, 0, 0);
 		
 		cx= Geometry.subD(light, intersect);
-		p=cx;
 		//double w= cx.module(cx);
 		//p.setX(p.getX()/w);
 		//p.setY(p.getY()/w);
@@ -225,9 +223,9 @@ public class PathTracer {
 			return new Color(0,0,0);
 		}
 		else {
-			int rr=/*fi.color.getRed()*/(int)colour(fi.color.getRed(),light,new Light(0.2,0.5,0,50),cx.getSize(),fi,cx,intersect);
-			int gg=/*fi.color.getGreen()*/(int)colour(fi.color.getGreen(),light,new Light(0.2,0.5,0,50),cx.getSize(),fi,cx,intersect);
-			int bb=/*fi.color.getBlue()*/(int)colour(fi.color.getBlue(),light,new Light(0.2,0.5,0,50),cx.getSize(),fi,cx,intersect);
+			int rr=/*fi.color.getRed()*/(int)colour(fi.color.getRed(),light,new Light(0.2,0.5,0,60),cx.getSize(),fi,cx,intersect);
+			int gg=/*fi.color.getGreen()*/(int)colour(fi.color.getGreen(),light,new Light(0.2,0.5,0,60),cx.getSize(),fi,cx,intersect);
+			int bb=/*fi.color.getBlue()*/(int)colour(fi.color.getBlue(),light,new Light(0.2,0.5,0,60),cx.getSize(),fi,cx,intersect);
 			if (rr > 255)
 				rr = 255;
 			if (bb > 255)
@@ -239,6 +237,7 @@ public class PathTracer {
 		}
 	}
 	
+	
 	public static double colour(int c, Point light, Material luz, double dcx, Figure fi, Direction cx,Point intersect) {
 		double a;
 
@@ -248,12 +247,15 @@ public class PathTracer {
 		cx.setX(-cx.getX());
 		cx.setY(-cx.getY());
 		cx.setZ(-cx.getZ());
-*/		Plane p = new Plane(new Point(0, 0, -100), new Direction(0, 1, 0), Color.BLUE, 500, luz);
+*/		Plane p = new Plane(new Point(0, -500, -500), new Direction(0, -1, 0), Color.BLUE, 500, luz);
 		dcx = Geometry.subD(p.getCenter(), intersect).getSize();
 		a=(255*luz.getW()/(Math.pow(dcx, 2)))*(c/Math.PI)*
-		Math.abs((cx.dotProduct(fi.getNormal(intersect), cx)))
-		*Math.abs(cx.dotProduct(Geometry.subD(intersect, p.getCenter()).doModule(), p.getNormal()));
+		Math.abs((Geometry.dotProduct(fi.getNormal(intersect), cx)))
+		*Math.abs(Geometry.dotProduct(Geometry.subD(intersect, p.getCenter()).doModule(), p.getNormal()));
 		//a=(luz.getW()*255/Math.abs((Math.pow(d, 2))))*(c*Math.abs(di.dotProduct(fi.getNormal(intersect), di)/w));
+		//System.out.println(Math.abs(cx.dotProduct(Geometry.subD(intersect, p.getCenter()).doModule(), p.getNormal())));
+		//System.out.println("fsdgfhzr "+Math.abs((cx.dotProduct(fi.getNormal(intersect), cx))));
+		//System.out.println("afdg"+(255*luz.getW()/(Math.pow(dcx, 2)))*(c/Math.PI));
 		
 		//else a=(luz.getW()/(d*d))*(0.5/Math.PI)*Math.abs(Geometry.dotProduct(fi.getNormal(intersect), di));
 
@@ -264,8 +266,10 @@ public class PathTracer {
 	}
 	
 	public static boolean block (List<Figure> f, Ray r) {
+		//Ray rI = new Ray(r.p0, r.p1, r.getD().doModule());
 		for (Figure sf : f) {
 			double t = sf.intersect(r.getP0(), r.getD());
+		//	System.out.println(r.getD().getSize(r.getD().scale(t), r.getP0())+ " "+ r.getD().getSize());
 			if (r.getD().getSize(r.getD().scale(t), r.getP0()) < r.getD().getSize() && t>0) {
 				return true;
 			}

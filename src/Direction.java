@@ -15,21 +15,12 @@ public class Direction extends Geometry {
 		super.setZ(D.getX() * E.getY() - D.getY() * E.getX());
 	}
 
-	public double module(Direction D) {
-		return Math.sqrt(Math.pow(D.getX(), 2)+Math.pow(D.getY(), 2)+Math.pow(D.getZ(), 2));
+	public double module() {
+		return Math.sqrt((getX()*getX())+(getY()*getY())+(getZ()*getZ()));
 	}
 	
-	public void doModule(Direction D) {
-		D.setX(D.getX() /Math.sqrt(Math.pow(D.getX(), 2)+Math.pow(D.getY(), 2)+Math.pow(D.getZ(), 2)));
-		D.setY(D.getY() /Math.sqrt(Math.pow(D.getX(), 2)+Math.pow(D.getY(), 2)+Math.pow(D.getZ(), 2)));
-		D.setZ(D.getZ() /Math.sqrt(Math.pow(D.getX(), 2)+Math.pow(D.getY(), 2)+Math.pow(D.getZ(), 2)));
-	}
-
-	public Direction doModule() {
-		this.setX(this.getX() /Math.sqrt(Math.pow(this.getX(), 2)+Math.pow(this.getY(), 2)+Math.pow(this.getZ(), 2)));
-		this.setY(this.getY() /Math.sqrt(Math.pow(this.getX(), 2)+Math.pow(this.getY(), 2)+Math.pow(this.getZ(), 2)));
-		this.setZ(this.getZ() /Math.sqrt(Math.pow(this.getX(), 2)+Math.pow(this.getY(), 2)+Math.pow(this.getZ(), 2)));
-	    return this;
+	public Direction normalize() {
+		return new Direction(getX()/module(), getY()/module(), getZ()/module());
 	}
 	
 	public Direction scale(double t) {

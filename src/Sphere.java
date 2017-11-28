@@ -11,35 +11,28 @@ public class Sphere extends Figure {
 
 
 	public Direction getNormal(Point p) {
-		Direction d= Geometry.subD(p,super.getCenter()).doModule();
+		Direction d= Geometry.addD(p,Geometry.subD(p,super.getCenter()).normalize());
 		return d; 
 	}
 	
 	public double intersect(Point O, Direction d) {
-		// Implementar interseccion esfera
-		/*
-		 * oc= d.dotProduct(center, O); b = 2*d.dotProduct(d, center);
-		 * c=d.dotProduct(center, center)-radio*radio; b*b-4*a*c a = d.dotProduct(d, d);
-		 * t=((-O.dotProduct(O, center))-radio)/d.scale(2).getSize(d, O);
-		 * System.out.println(t);
-		 */
-	//	System.out.println("Esfera");
-		t = (-(2 * d.dotProduct(d, center)) + Math.sqrt((2 * d.dotProduct(d, center)) * (2 * d.dotProduct(d, center))
-				- 4 * (d.dotProduct(d, d)) * (d.dotProduct(center, center) - radio * radio)))
-				/ (2 * (d.dotProduct(d, d)));
+		// Interseccion esfera
+		t = (-(2 * Geometry.dotProduct(d, center)) + Math.sqrt((2 * Geometry.dotProduct(d, center)) * (2 * Geometry.dotProduct(d, center))
+				- 4 * (Geometry.dotProduct(d, d)) * (Geometry.dotProduct(center, center) - radio * radio)))
+				/ (2 * (Geometry.dotProduct(d, d)));
 
-		if ((t > (-(2 * d.dotProduct(d, center))
-				- Math.sqrt((2 * d.dotProduct(d, center)) * (2 * d.dotProduct(d, center))
-						- 4 * (d.dotProduct(d, d)) * (d.dotProduct(center, center) - radio * radio)))
-				/ (2 * (d.dotProduct(d, d))))
-				&& (-(2 * d.dotProduct(d, center))
-						- Math.sqrt((2 * d.dotProduct(d, center)) * (2 * d.dotProduct(d, center))
-								- 4 * (d.dotProduct(d, d)) * (d.dotProduct(center, center) - radio * radio)))
-						/ (2 * (d.dotProduct(d, d))) > 0) {
-			t = (-(2 * d.dotProduct(d, center))
-					- Math.sqrt((2 * d.dotProduct(d, center)) * (2 * d.dotProduct(d, center))
-							- 4 * (d.dotProduct(d, d)) * (d.dotProduct(center, center) - radio * radio)))
-					/ (2 * (d.dotProduct(d, d)));
+		if ((t > (-(2 * Geometry.dotProduct(d, center))
+				- Math.sqrt((2 * Geometry.dotProduct(d, center)) * (2 * Geometry.dotProduct(d, center))
+						- 4 * (Geometry.dotProduct(d, d)) * (Geometry.dotProduct(center, center) - radio * radio)))
+				/ (2 * (Geometry.dotProduct(d, d))))
+				&& (-(2 * Geometry.dotProduct(d, center))
+						- Math.sqrt((2 * Geometry.dotProduct(d, center)) * (2 * Geometry.dotProduct(d, center))
+								- 4 * (Geometry.dotProduct(d, d)) * (Geometry.dotProduct(center, center) - radio * radio)))
+						/ (2 * (Geometry.dotProduct(d, d))) > 0) {
+			t = (-(2 * Geometry.dotProduct(d, center))
+					- Math.sqrt((2 * Geometry.dotProduct(d, center)) * (2 * Geometry.dotProduct(d, center))
+							- 4 * (Geometry.dotProduct(d, d)) * (Geometry.dotProduct(center, center) - radio * radio)))
+					/ (2 * (Geometry.dotProduct(d, d)));
 		}
 
 	//	System.out.println((2 * d.dotProduct(d, center)) * (2 * d.dotProduct(d, center))

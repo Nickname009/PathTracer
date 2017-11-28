@@ -4,7 +4,7 @@ import javax.swing.text.Position;
 
 public class Plane extends Figure{
 	double d;
-	private Geometry g= new Geometry(0, 0, 0);
+
 	public Plane(Point center, Direction normal, Color color, double d, Material m){
 		super(center, color, m, normal);
 		this.normal = normal;
@@ -24,13 +24,20 @@ public class Plane extends Figure{
 	}
 	
 	public double intersect( Point O,Direction D) {
-		t=-(g.dotProduct(O, normal)+d) / (g.dotProduct(D, normal));
-		
+		t=-(Geometry.dotProduct(O, normal)+d) / (Geometry.dotProduct(D, normal));
 		if (t>0) {
 			return t;
 		}
-		return -1;
+		else return -1;
 	}
+	
+
+	/*public void getRNDP() {
+		Point p	= new Point((-30),
+				(-30 + ((60) - 30) * r.nextDouble()) + (-30)),
+
+				0+((0 + ((40) - 0) * r.nextDouble()) + 40));
+	}*/
 }
 
 

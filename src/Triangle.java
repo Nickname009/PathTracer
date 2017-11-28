@@ -27,8 +27,10 @@ public class Triangle extends Figure {
 
 		System.out.println(p3.getX());
 	    // get triangle edge vectors and plane normal
-		center.sub(u, this.p2, this.p1);
-		center.sub(v, this.p3, this.p1);
+		//center.sub(u, this.p2, this.p1);
+		u= Geometry.subD( this.p2, this.p1);
+		//center.sub(v, this.p3, this.p1);
+		v= Geometry.subD( this.p3, this.p1);
 	    n.crossProduct(u, v);              // cross product
 	    
 	}
@@ -52,12 +54,15 @@ public class Triangle extends Figure {
 		    uu = center.dotProduct(u, u);
 		    uv = center.dotProduct(u,v);
 		    vv = center.dotProduct(v,v);
-
-		    a = -center.dotProduct(n,center.sub(w0, O, p1));
+		    w0 = Geometry.subD(O, p1);
+		    //a = -center.dotProduct(n,center.sub(w0, O, p1));
+		    a = -center.dotProduct(n,w0);
 		    b=center.dotProduct(n,D);
 		    r = a / b;
-		    I.add(O, D.scale(r));  
-		    w=I.sub(w, I, p1);
+		    I = Geometry.addP(O, D.scale(r));
+		    //I.add(O, D.scale(r));  
+		    w=Geometry.subD(I, p1);
+		    //w=I.sub(w, I, p1);
 		    // plane.intersect(O, D)
 		    wu = center.dotProduct(w,u);
 		    wv = center.dotProduct(w,v);

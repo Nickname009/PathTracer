@@ -8,7 +8,7 @@ public class Ray {
 		this.d = d;
 		this.p0 = p0;
 		this.p1 = p1;
-		d= d.scale(0.99999);
+		d= d.scale(0.99);
 	}
 	public Point getP1() {
 		return p1;

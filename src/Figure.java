@@ -15,7 +15,16 @@ public class Figure {
 	}
 	
 	public Direction getNormal(Point p) {
-		return normal;
+		return normal; /*
+		System.out.println(Geometry.subD(p,getCenter()).module());
+		
+		Geometry d=  Geometry.subD(p,getCenter());
+		Direction dd = new Direction(d.getX(), d.getY(), d.getZ()).normalize();
+		return dd; */
+	}
+	public Direction getNormal() {
+		//System.out.println(Geometry.subD(p,getCenter()).doModule());
+		return normal; 
 	}
 	public Material getM() {
 		return m;

@@ -76,7 +76,7 @@ public class PathTracer {
 		figures.add(new Plane(new Point(-100, 0, 0), new Direction(-1, 0, 0), Color.MAGENTA, 40, m)); // izq
 		figures.add(new Plane(new Point(-100, 0, 0), new Direction(1, 0, 0), Color.ORANGE, 40, m));
 		// figures.add(new Triangle(new Point(0, 0, 20), new Point(0, 1, 20), new Point(1, 1, 20), new Direction(0, 0, 1),Color.RED, 10, m));
-		figures.add(new Sphere(new Point(0, 10, -90), 7, Color.RED, m, new Direction(0, 0, 0)));
+		figures.add(new Sphere(new Point(0, -40, -93), 15, Color.RED, m, new Direction(0, 0, 0)));
 		cuadrado light = new cuadrado(new Point(0, -19, -30), new Direction(0, 1, 0), Color.WHITE, 19, new Light(0,0,0,0),-10,-10,10,-20);
 		//figures.add(light);
 		//figures.add(new Triangle(new Point(-5, -10, -20), new Point(5, -19, -20), new Point(5, -19, -10), new Direction(0, -1, 0),Color.WHITE, 10, m));
@@ -173,7 +173,7 @@ public class PathTracer {
 			return Color.BLACK;
 		}
 		else {
-			Point pl = new Point (0,40,80);//light.getRNDP();
+			Point pl = new Point (0,40,50);//light.getRNDP();
 			int rr=(int)colour(fi.color.getRed(),pl,light,fi,cx,intersect);
 			int gg=(int)colour(fi.color.getGreen(),pl,light,fi,cx,intersect);
 			int bb=(int)colour(fi.color.getBlue(),pl,light,fi,cx,intersect);
@@ -193,7 +193,7 @@ public class PathTracer {
 		double dcx = Geometry.subD(light, intersect).module();
 		a=(255*60/(dcx*dcx))*(c/Math.PI)*
 		Math.abs((Geometry.dotProduct(fi.getNormal(intersect).normalize(), cx)))
-		/**Math.abs(Geometry.dotProduct(Geometry.subD(light, intersect).normalize(),luz.getNormal()))*/;
+		*Math.abs(Geometry.dotProduct(Geometry.subD(light, intersect).normalize(),luz.getNormal()));
 		return a;
 	}
 	

@@ -7,11 +7,13 @@ public class Sphere extends Figure {
 	public Sphere(Point center, double radio, Color color, Material m, Direction n) {
 		super(center, color, m,n );
 		this.radio = radio;
+		is_sphere=true;
+		setSphere();
 	}
 
 
 	public Direction getNormal(Point p) {
-		Direction d= Geometry.addD(p,Geometry.subD(p,super.getCenter()).normalize());
+		Direction d= Geometry.subD(p,super.getCenter()).normalize();
 		return d; 
 	}
 	

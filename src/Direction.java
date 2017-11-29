@@ -15,6 +15,8 @@ public class Direction extends Geometry {
 		super.setZ(D.getX() * E.getY() - D.getY() * E.getX());
 	}
 
+	
+
 	public double module() {
 		return Math.sqrt((getX()*getX())+(getY()*getY())+(getZ()*getZ()));
 	}

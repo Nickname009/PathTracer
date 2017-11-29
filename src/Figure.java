@@ -6,21 +6,37 @@ public class Figure {
 	Material m;
 	double t;
 	Direction normal;
+	boolean is_sphere=false;
+	boolean is_light=false;
+	String name;
 	
 	public Figure(Point center, Color color, Material m, Direction normal) {
 		this.center = center;
 		this.color = color;
 		this.m = m;
 		this.normal=normal;
+		this.name= "h";
+	}
+	
+	public void setSphere() {
+		is_sphere=true;
+		System.out.println("true?");
+	}
+	
+	public void setLight(boolean luz) {
+		is_light=luz;
+		System.out.println("true?");
 	}
 	
 	public Direction getNormal(Point p) {
-		return normal; /*
-		System.out.println(Geometry.subD(p,getCenter()).module());
-		
-		Geometry d=  Geometry.subD(p,getCenter());
-		Direction dd = new Direction(d.getX(), d.getY(), d.getZ()).normalize();
-		return dd; */
+		if (is_sphere == false) {
+			return normal; 
+		}
+		else {
+			System.out.println("on sphere");
+			Direction d=  Geometry.subD(p,getCenter()).normalize();
+			return d;
+		}
 	}
 	public Direction getNormal() {
 		//System.out.println(Geometry.subD(p,getCenter()).doModule());

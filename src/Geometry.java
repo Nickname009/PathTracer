@@ -5,7 +5,7 @@ public class Geometry {
 	public Geometry(double x, double y, double z) {
 		this.x=x;
 		this.y=y;
-		this.z=z;
+		this.z=z; 
 	}
 	public double getSize( Geometry g, Geometry d) {
 		return (Math.sqrt(((g.getX()-d.getX())*(g.getX()-d.getX()))+
@@ -32,16 +32,21 @@ public class Geometry {
 	public static Point addP(Geometry O, Geometry P) {
 		return new Point(O.getX() + P.getX(), O.getY() + P.getY(), O.getZ() + P.getZ());
 	}
-	
 	public static Geometry subG(Geometry O, Geometry P) {
 		return new Geometry(O.getX() - P.getX(), O.getY() - P.getY(), O.getZ() - P.getZ());
 	}
-	
-
+	public static Point subP(Geometry O, Geometry P) {
+		return new Point(O.getX() - P.getX(), O.getY() - P.getY(), O.getZ() - P.getZ());
+	}
 	public static Direction subD(Geometry O, Geometry P) {
 		return new Direction(O.getX() - P.getX(),O.getY() - P.getY() , O.getZ() - P.getZ());
 	}
-	
+	public static Direction crossProduct2(Direction D, Direction E) {
+		Direction d= new Direction(D.getY() * E.getZ() - D.getZ() * E.getY(),
+				D.getZ() * E.getX() - D.getX() * E.getZ(),
+				D.getX() * E.getY() - D.getY() * E.getX());
+		return d;
+	}
 	
 	public static double dotProduct(Geometry O, Geometry P) {
 		return (O.getX()*P.getX()+ O.getY()*P.getY()+O.getZ()*P.getZ());

@@ -1,9 +1,9 @@
 
 
 public class Camera{
-	Direction l = new Direction(-20, 0, 0);
+	Direction l = new Direction(-3, 0, 0);
 	Direction f = new Direction(0, 0, 0);
-	Direction u = new Direction(0, -20, 0);
+	Direction u = new Direction(0, -3, 0);
 	Point center;
 	public Camera(Point center, Point Orientation) {
 		this.center=center;

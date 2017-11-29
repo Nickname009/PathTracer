@@ -21,7 +21,7 @@ public class PathTracer {
 		// Settings photo
 		int y = 720;
 		int x = 980;
-		int antialiasing = 10;
+		int antialiasing = 7;
 		Random r = new Random();
 		int porcentage = 0;
 
@@ -32,7 +32,7 @@ public class PathTracer {
 
 		// Camera
 		Point center = new Point(0, 0, 0);
-		Point orientation = new Point(0, 0, 25);
+		Point orientation = new Point(0, 0, 1);
 		Camera camera = new Camera(center, orientation);
 
 		// RAY
@@ -41,7 +41,7 @@ public class PathTracer {
 		Point pA = new Point(0, -camera.getu().getY(), camera.getf().getZ());
 
 		//new rayo camara
-		Direction d = new Direction(0, 0, 1);
+		Direction d = new Direction(0, 0, 3);
 		Ray rayPath = new Ray(center, p, d.normalize());
 		//IntersectionRay iR = new IntersectionRay();
 
@@ -70,18 +70,32 @@ public class PathTracer {
 		List<Figure> figures = new ArrayList<Figure>();
 		Figure defaultF = new Figure(new Point(0, 0, 0), Color.BLACK, m, new Direction(0, 0, 0));
 		Color finalColor;
-		figures.add(new Plane(new Point(0, 500, -500), new Direction(0, -1, 0), Color.BLUE, 40, l)); // arriba
-		figures.add(new Plane(new Point(-100, 0, 0), new Direction(0, 1, 0), Color.GREEN, 40, m));
-		figures.add(new Plane(new Point(-100, 0, 0), new Direction(0, 0, -1), Color.PINK, 100, m)); // fondo
-		figures.add(new Plane(new Point(-100, 0, 0), new Direction(-1, 0, 0), Color.MAGENTA, 40, m)); // izq
-		figures.add(new Plane(new Point(-100, 0, 0), new Direction(1, 0, 0), Color.ORANGE, 40, m));
+		figures.add(new Plane(new Point(0, 2, 0), new Direction(0, -1, 0), Color.BLUE, 5.5, l,"top")); // arriba
+		figures.add(new Plane(new Point(0, -2, 0), new Direction(0, 1, 0), Color.GREEN, 5.5, m,"down"));
+		figures.add(new Plane(new Point(0, 0, -10), new Direction(0, 0, -1), Color.PINK, 5.5, m,"bg")); // fondo
+		figures.add(new Plane(new Point(-10, 0, 0), new Direction(-1, 0, 0), Color.MAGENTA, 5.5, m,"left")); // izq
+		figures.add(new Plane(new Point(10, 0, 0), new Direction(1, 0, 0), Color.ORANGE, 5.5, m,"right"));
+//		figures.add(new Triangle(new Point(-5, -5, -0), new Point(-5, 5, -0), new Point(-5, 5, -10), new Direction(0, -1, 0),Color.MAGENTA, 10, m,false));
+//		figures.add(new Triangle(new Point(-5, -5, -0), new Point(-5, 5, -10), new Point(-5, -5, -10), new Direction(0, -1, 0),Color.MAGENTA, 10, m,false));
+//		figures.add(new Triangle(new Point(5, -5, -0), new Point(5, 5, -0), new Point(5, 5, -10), new Direction(0, -1, 0),Color.ORANGE, 10, m,false));
+//		figures.add(new Triangle(new Point(5, -5, -0), new Point(5, 5, -10), new Point(5, -5, -10), new Direction(0, -1, 0),Color.ORANGE, 10, m,false));
+//		figures.add(new Triangle(new Point(-5, -5, -0), new Point(5, -5, -10), new Point(5, -5, -0), new Direction(0, -1, 0),Color.GREEN, 10, m,false));
+//		figures.add(new Triangle(new Point(5, -5, -10), new Point(-5, -5, 0), new Point(-5, -5, -10), new Direction(0, -1, 0),Color.GREEN, 10, m,false));
+//		figures.add(new Triangle(new Point(-5, 5, -0), new Point(5, 5, -10), new Point(5, 5, -0), new Direction(0, -1, 0),Color.BLUE, 10, m,false));
+//		figures.add(new Triangle(new Point(5, 5, -10), new Point(-5, 5, 0), new Point(-5, 5, -10), new Direction(0, -1, 0),Color.BLUE, 10, m,false));
+//		figures.add(new Triangle(new Point(-5, -5, -10), new Point(5, 5, -10), new Point(5, -5, -10), new Direction(0, -1, 0),Color.PINK, 10, m,false));
+//		figures.add(new Triangle(new Point(-5, 5, -10), new Point(5, 5, -10), new Point(-5, -5, -10), new Direction(0, -1, 0),Color.PINK, 10, m,false));
+		
+		
 		// figures.add(new Triangle(new Point(0, 0, 20), new Point(0, 1, 20), new Point(1, 1, 20), new Direction(0, 0, 1),Color.RED, 10, m));
-		figures.add(new Sphere(new Point(0, -40, -93), 15, Color.RED, m, new Direction(0, 0, 0)));
-		cuadrado light = new cuadrado(new Point(0, -19, -30), new Direction(0, 1, 0), Color.WHITE, 19, new Light(0,0,0,0),-10,-10,10,-20);
+		//figures.add(new Sphere(new Point(0, 0, -5), 0.5, Color.RED, m, new Direction(0, 0, 0)));
+		//cuadrado light = new cuadrado(new Point (0,99.8, 120), new Direction(0, -1, 0), Color.WHITE, 99.9, new Light(0,0,0,0),-10,-10,10,-20);
 		//figures.add(light);
-		//figures.add(new Triangle(new Point(-5, -10, -20), new Point(5, -19, -20), new Point(5, -19, -10), new Direction(0, -1, 0),Color.WHITE, 10, m));
-		//figures.add(new Triangle(new Point(-5, -10, -10), new Point(-5, -19, -20), new Point(5, -19, -20), new Direction(0, -1, 0),Color.WHITE, 10, m));
-		//figures.add(new Triangle(new Point(-20, -20, 0), new Point(-20, 50, 0), new Point(-20, -20, -40), new Direction(0, 0, 1),Color.WHITE, 10, m));
+		figures.add(new Triangle(new Point(-2, -2, -5), new Point(2, -2, -5), new Point(2, -2, -6), new Direction(-1, -1, -1),Color.YELLOW, 10, m,false, "try1"));
+		Triangle t1 =new Triangle(new Point(-3, -14, -4), new Point(-3, -14, -3), new Point(3, -14, -3), new Direction(0, -1, 0),Color.WHITE, 14, m,true,"light");
+		Triangle t2 =new Triangle(new Point(-3, -14, -4), new Point(3, -14, -4), new Point(3, -14, -3), new Direction(0, 0, 1),Color.WHITE, 14, m,true,"light");
+		figures.add(t1);
+		figures.add(t2);
 		
 		// readFile1(figures, "ket.ply");
 
@@ -94,7 +108,7 @@ public class PathTracer {
 		for (int py = 0; py < y; py++) {
 			for (int px = 0; px < x; px++) {
 				finalColor = render(rayPath, rA, gA, bA, sx, sy, antialiasing, pA, f, defaultF, r, geo,
-						camera, t, s, figures, rr,light);
+						camera, t, s, figures, rr,t1,t2);
 				bI.setRGB(px, py, finalColor.getRGB());
 				p.setX(p.getX() + sx);
 			}
@@ -107,21 +121,11 @@ public class PathTracer {
 		ImageIO.write(bI, "bmp", h);
 	}
 
-	public static void readFile1(List<Figure> figures, String f) throws FileNotFoundException {
-		File file = new File(f);
-		Scanner scan = new Scanner(file);
-		// setting file
-		while (scan.hasNextDouble()) {
-			Point p1 = new Point(scan.nextDouble() + 1, scan.nextDouble() + 1, scan.nextDouble() + 5);
-			Point p2 = new Point(scan.nextDouble() + 1, scan.nextDouble() + 1, scan.nextDouble() + 5);
-			Point p3 = new Point(scan.nextDouble() + 1, scan.nextDouble() + 1, scan.nextDouble() + 5);
-			figures.add(new Triangle(p1, p2, p3, new Direction(0, 0, 0), Color.RED, 0, null));
-		}
-	}
+	
 
 	public static Color render(Ray rayPath, int rA, int gA, int bA, double sx, double sy, int antialiasing,
 			Point pA, Figure f, Figure defaultF, Random r, Geometry geo, Camera camera, double t, double s,
-			List<Figure> figures, RussianRoulette rr,cuadrado light) {
+			List<Figure> figures, RussianRoulette rr,Triangle light,Triangle light2) {
 		rA = 0;
 		gA = 0;
 		bA = 0;
@@ -140,13 +144,14 @@ public class PathTracer {
 					s = t;
 					f = sf;
 					//direct light
-					rayPath.setPIntersect(Geometry.addP(rayPath.getP0(),rayPath.getD().scale(t)));
+					rayPath.setPIntersect(Geometry.addP(rayPath.getP0(),rayPath.getD().scale(t*0.99)));
 					// Light of direct Light
 				}
 			}
-			Color lD = luzDirecta(rayPath.pIntersect, light, figures, f);
+			Color lD;
+			if (!f.is_light) lD = luzDirecta(rayPath.pIntersect, light, light2, figures, f);
 			// Recursivity ray
-
+			else lD = new Color(255,255,255);
 			// end ray
 
 			rA = rA + lD.getRed();
@@ -164,19 +169,36 @@ public class PathTracer {
 			gA = 255;
 		return (new Color(rA, gA, bA));
 	}
-	public static Color luzDirecta(Point intersect, cuadrado light, List<Figure> f, Figure fi) {
+	public static Color luzDirecta(Point intersect, Triangle light, Triangle light2, List<Figure> f, Figure fi) {
 		
 		Direction cx ;
-		cx= Geometry.subD(light.getCenter(), intersect).normalize();
-		Ray r = new Ray(intersect, light.getRNDP(), cx);
-		if(block(f,r)) {
-			return Color.BLACK;
+		Point pLuz = /*new Point(0, -14, -4.2)*/light.getRnd();
+//		Direction dLuz = Geometry.subD(pLuz, intersect);
+//		Point p2 = light2.getRnd();
+//		Direction a = Geometry.subD(p2,intersect);
+//		pLuz = Geometry.subP(pLuz, p2);
+//		pLuz.setX(a.getX());
+//		pLuz.setY(a.getY());
+//		pLuz.setZ(a.getZ());
+		
+//		pLuz.setX(0);
+//		pLuz.setY(10);
+//		pLuz.setZ(-10);
+//		System.out.println("X "+pLuz.getX());
+//		System.out.println("Y "+pLuz.getY());
+//		System.out.println("Z "+pLuz.getZ());
+		//cx= Geometry.subD(light.getCenter(), intersect);
+		cx= Geometry.subD(pLuz, intersect).normalize();
+		Ray r = new Ray(intersect, pLuz, cx);
+		if(!block(f,r,fi)) {
+			System.out.println("REEEED");
+			return Color.RED;
 		}
 		else {
-			Point pl = new Point (0,40,50);//light.getRNDP();
-			int rr=(int)colour(fi.color.getRed(),pl,light,fi,cx,intersect);
-			int gg=(int)colour(fi.color.getGreen(),pl,light,fi,cx,intersect);
-			int bb=(int)colour(fi.color.getBlue(),pl,light,fi,cx,intersect);
+			//Point pl = light.getCenter();//light.getRNDP();
+			int rr=(int)colour(fi.color.getRed(),pLuz,light,fi,cx,intersect);
+			int gg=(int)colour(fi.color.getGreen(),pLuz,light,fi,cx,intersect);
+			int bb=(int)colour(fi.color.getBlue(),pLuz,light,fi,cx,intersect);
 			if (rr > 255)
 				rr = 255;
 			if (bb > 255)
@@ -190,20 +212,71 @@ public class PathTracer {
 	
 	public static double colour(int c, Point light, Figure luz, Figure fi, Direction cx,Point intersect) {
 		double a;
-		double dcx = Geometry.subD(light, intersect).module();
-		a=(255*60/(dcx*dcx))*(c/Math.PI)*
-		Math.abs((Geometry.dotProduct(fi.getNormal(intersect).normalize(), cx)))
-		*Math.abs(Geometry.dotProduct(Geometry.subD(light, intersect).normalize(),luz.getNormal()));
+		double dcx = Geometry.subD( light, intersect).module();
+		//System.out.println(dcx);
+		a=(255*5/(dcx*dcx))*(c/Math.PI)*
+		Math.abs((Geometry.dotProduct(fi.getNormal(intersect), cx)))
+		*Math.abs(Geometry.dotProduct(Geometry.subD( intersect,light).normalize(),luz.getNormal()));
 		return a;
 	}
 	
-	public static boolean block (List<Figure> figures, Ray r) {
-		for (Figure sf : figures) {
-			double t = sf.intersect(r.getP0(), r.getD().normalize());
-			if ((r.getD().scale(t).module() < r.getD().module()) && t>0) {
+	public static boolean block (List<Figure> figures, Ray r, Figure fi) {
+	/*	Direction rI = r.getD().normalize();
+		Figure f=null;
+		double distanciaEscaladaAObjetoMasCercano=99999999;
+		double escalarDeDistanciaInterseccion=99999999;
+		double distanciaLuz;
+		for (Figure figure : figures) {
+			escalarDeDistanciaInterseccion = figure.intersect(r.getP0(), rI);
+			distanciaLuz = r.getD().module();
+			distanciaEscaladaAObjetoMasCercano = rI.scale(escalarDeDistanciaInterseccion).module();
+
+//			System.out.println("tt "+tt);
+//			System.out.println(s);
+			if ( distanciaEscaladaAObjetoMasCercano < distanciaLuz && escalarDeDistanciaInterseccion>0) {
+				f=figure;
 				return true;
 			}
+		}		if (f!=null)return f.is_light;
+
+	return false;
+*/
+		Figure f = null;
+		double s = 9999999;
+		double t = 0;
+		for (Figure sf : figures) {
+			t = sf.intersect(r.getP0(), r.getD().normalize());
+			if (s > t && t > 0 && !sf.equals(fi)) {
+				s = t;
+				f = sf;
+				//direct light
+				//r.setPIntersect(Geometry.addP(r.getP0(),r.getD().scale(t-0.01)));
+				// Light of direct Light
+			}
+			
 		}
-		return false;
+		//System.out.println("s "+s);
+		//System.out.println(intersect.getX()+" "+intersect.getY()+" "+intersect.getZ()+"intersect");
+		if (f!=null) {
+		//	System.out.println(f.getCenter().getX()+ " "+f.getCenter().getY()+" "+f.getCenter().getZ());
+			System.out.println(f.name);
+			return f.is_light;
+		}
+		System.out.println("FALSEE");
+		return true;
 	}
 }
+
+
+/*public static void readFile1(List<Figure> figures, String f) throws FileNotFoundException {
+File file = new File(f);
+Scanner scan = new Scanner(file);
+// setting file
+while (scan.hasNextDouble()) {
+	Point p1 = new Point(scan.nextDouble() + 1, scan.nextDouble() + 1, scan.nextDouble() + 5);
+	Point p2 = new Point(scan.nextDouble() + 1, scan.nextDouble() + 1, scan.nextDouble() + 5);
+	Point p3 = new Point(scan.nextDouble() + 1, scan.nextDouble() + 1, scan.nextDouble() + 5);
+	figures.add(new Triangle(p1, p2, p3, new Direction(0, 0, 0), Color.RED, 0, null));
+}
+}
+*/

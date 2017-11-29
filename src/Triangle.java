@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.Random;
 
 import javax.swing.text.Position;
 
@@ -16,16 +17,16 @@ public class Triangle extends Figure {
 	double s, t, r, a, b,d, uu, uv, vv, wu, wv, diq;
 	private Geometry g = new Geometry(0, 0, 0);
 
-	public Triangle(Point p1, Point p2, Point p3, Direction normal, Color color, double d, Material m) {
-		super(new Point(0, 0, 0),color, m, normal);
+	public Triangle(Point p1, Point p2, Point p3, Direction normal, Color color, double d, Material m, boolean luz, String name) {
+		super(new Point(0, 0, 0),color, m, Geometry.crossProduct2(Geometry.subD(p2, p1), Geometry.subD(p3, p1)).normalize());
 		this.p1 = p1;
 		this.p2 = p2;
 		this.p3 = p3;
-		this.normal = normal;
 		this.d = d;
-		plane = new Plane(center, normal, color, d, m);
+		setLight(luz);
+	//	plane = new Plane(center, normal, color, d, m);
 
-		System.out.println(p3.getX());
+		super.name= name;
 	    // get triangle edge vectors and plane normal
 		//center.sub(u, this.p2, this.p1);
 		u= Geometry.subD( this.p2, this.p1);
@@ -80,5 +81,28 @@ public class Triangle extends Figure {
 		        return -1;
 
 		    return 1;                       // I is in T
+		}
+	
+	public Point getRnd() {
+	/*	Random r=new Random();
+		double rand1=r.nextDouble();
+		double rand2=r.nextDouble();
+		Direction d1= Geometry.subD(p2, p1);
+		d1=d1.scale(rand1);
+		Direction d2= Geometry.subD(p3, p1);
+		d2=d2.scale(rand2);
+		d1=Geometry.addD(d1, d2);
+		d1.scale(0.5);
+		return Geometry.addP(p1,d1);
+	*/Random r=new Random();
+		double rand1=r.nextDouble();
+		double rand2=rand1*r.nextDouble();
+		Direction d1= Geometry.subD(p2, p1);
+		d1=d1.scale(rand1);
+		Direction d2= Geometry.subD(p3, p1);
+		d2=d2.scale(rand2);
+		d1=Geometry.addD(d1, d2);
+		return Geometry.addP(p1,d1);
+	
 		}
 }

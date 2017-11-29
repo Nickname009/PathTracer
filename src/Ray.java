@@ -5,10 +5,9 @@ public class Ray {
 	Point p1;
 	Point pIntersect = new Point(0, 0, 0);
 	public Ray(Point p0, Point p1, Direction d) {
-		this.d = d;
 		this.p0 = p0;
 		this.p1 = p1;
-		d= d.scale(0.99);
+		this.d= d;
 	}
 	public Point getP1() {
 		return p1;
@@ -28,7 +27,7 @@ public class Ray {
 		return d;
 	}
 	public void setD(Direction d) {
-		this.d = d;
+		this.d = d.scale(0.97);
 	}
 	public Point getP0() {
 		return p0;
